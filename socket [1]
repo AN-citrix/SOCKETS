@@ -1,0 +1,39 @@
+#!/usr/bin/python3
+
+import socket
+
+ipv4=socket.AF_INET
+
+tcp=socket.SOCK_STREAM
+
+s = socket.socket(ipv4,tcp)
+
+site="certstars.com"
+
+s.connect((site, 80))
+
+
+req='GET / HTTP/1.1\r\nHost: {0}\r\n\r\nUser-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0\r\nAccept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\r\nAccept-Language: en-US,en;q=0.5\r\nAccept-Encoding: gzip, deflate\r\nConnection: close\r\nUpgrade-Insecure-Requests: 1'.format(site)
+
+s.sendall(req.encode())
+
+while True:
+
+    new = s.recv(4096)
+    if not new:
+      s.close()
+      break
+    print(new)
+
+
+
+
+
+
+
+
+
+
+
+
+
